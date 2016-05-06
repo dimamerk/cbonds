@@ -1,0 +1,2058 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Lang" content="en">
+	<meta name="author" content="">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<title>Тестовое задание (Developer)</title>
+
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 700px;
+		}
+
+		table th {
+			background: #EEE;
+			border: 1px solid #CCC;
+		}
+		table td {
+			border: 1px solid #CCC;
+		}
+	</style>
+</head>
+<body>
+	<h1>Тестовое задание (Developer)</h1>
+	<p>
+		Задания, описанные ниже не сложные, но каждое их них может иметь некоторые подводные камни, обойти которые поможет умение разбираться в документации и решать возникающие проблемы. Задания связаны между собой логически, но если какое-либо задание сделать по каким-либо причинам не удается, можно приступать к следующему, задав ему необходимые входные данные. Скрипты должны работать на PHP 5.2.
+	</p>
+
+	<h2>Задача #1</h2>
+	<p>
+		Используя curl (<a href="http://php.net/manual/en/book.curl.php">http://php.net/manual/en/book.curl.php</a>), получить контент с данной страницы (http://www.cbonds.info/sandbox/some_source.php) и записать его в файл (<strong>server_data.html</strong>)
+	</p>
+
+	<h2>Задача #2</h2>
+	<p>
+		Используя регулярные выражения PCRE (<a href="http://php.net/manual/en/book.pcre.php">http://php.net/manual/en/book.pcre.php</a>), разобрать данные из таблицы (<a href="#stable">Some table</a>) файла <strong>server_data.html</strong> и сформировать из них xml-файл (<strong>emissions.xml</strong>) следующего формата:
+		<pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;items&gt;
+	&lt;item&gt;
+		&lt;property title=&quot;&#1069;&#1084;&#1080;&#1090;&#1077;&#1085;&#1090;&quot;&gt;&lt;![CDATA[&#1054;&#1090;&#1082;&#1088;&#1099;&#1090;&#1086;&#1077; &#1072;&#1082;&#1094;&#1080;&#1086;&#1085;&#1077;&#1088;&#1085;&#1086;&#1077; &#1086;&#1073;&#1097;&#1077;&#1089;&#1090;&#1074;&#1086; &quot;&#1040;&#1052;&#1059;&#1056;&#1052;&#1045;&#1058;&#1040;&#1051;&#1051;&quot;]]&gt;&lt;/property&gt;
+		&lt;property title=&quot;&#1069;&#1084;&#1080;&#1090;&#1077;&#1085;&#1090; (&#1082;&#1088;&#1072;&#1090;&#1082;&#1086;)&quot;&gt;&lt;![CDATA[&#1058;&#1043;&#1050;-2]]&gt;&lt;/property&gt;
+		&lt;!-- ... &#1076;&#1083;&#1103; &#1082;&#1072;&#1078;&#1076;&#1086;&#1075;&#1086; &#1089;&#1074;&#1086;&#1081;&#1089;&#1090;&#1074;&#1072; &#1074; &#1090;&#1072;&#1073;&#1083;&#1080;&#1094;&#1077; --&gt;
+	&lt;/item&gt;
+	&lt;item&gt;
+		&lt;property title=&quot;&#1069;&#1084;&#1080;&#1090;&#1077;&#1085;&#1090;&quot;&gt;&lt;![CDATA[&#1054;&#1090;&#1082;&#1088;&#1099;&#1090;&#1086;&#1077; &#1072;&#1082;&#1094;&#1080;&#1086;&#1085;&#1077;&#1088;&#1085;&#1086;&#1077; &#1086;&#1073;&#1097;&#1077;&#1089;&#1090;&#1074;&#1086; &quot;&#1053;&#1077;&#1092;&#1090;&#1103;&#1085;&#1072;&#1103; &#1082;&#1086;&#1084;&#1087;&#1072;&#1085;&#1080;&#1103; &quot;&#1051;&#1059;&#1050;&#1054;&#1049;&#1051;&quot;&quot;]]&gt;&lt;/property&gt;
+		&lt;property title=&quot;&#1069;&#1084;&#1080;&#1090;&#1077;&#1085;&#1090; (&#1082;&#1088;&#1072;&#1090;&#1082;&#1086;)&quot;&gt;&lt;![CDATA[&#1051;&#1059;&#1050;&#1054;&#1049;&#1051;]]&gt;&lt;/property&gt;
+		&lt;!-- ... &#1076;&#1083;&#1103; &#1082;&#1072;&#1078;&#1076;&#1086;&#1075;&#1086; &#1089;&#1074;&#1086;&#1081;&#1089;&#1090;&#1074;&#1072; &#1074; &#1090;&#1072;&#1073;&#1083;&#1080;&#1094;&#1077; --&gt;
+	&lt;/item&gt;
+	&lt;!-- ... &#1076;&#1083;&#1103; &#1082;&#1072;&#1078;&#1076;&#1086;&#1081; &#1089;&#1090;&#1088;&#1086;&#1082;&#1080; &#1074; &#1090;&#1072;&#1073;&#1083;&#1080;&#1094;&#1077; --&gt;
+&lt;items&gt;
+		</pre>
+		Для формирования xml-файла должен использоваться DOM (<a href="http://php.net/manual/en/book.dom.php">http://php.net/manual/en/book.dom.php</a>).
+	</p>
+	<h2>Задача #3</h2>
+	<p>
+		Написать xsl-шаблон <strong>style.xsl</strong> для вывода данных из <strong>emissions.xml</strong> в следующем формате:
+		<table>
+			<thead>
+				<tr>
+					<th colspan="2">Эмитент: Открытое акционерное общество "АМУРМЕТАЛЛ"</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Эмитент (кратко):</td>
+					<td>ТГК-2</td>
+				</tr>
+				<tr>
+					<td>Тип:</td>
+					<td>Облигация ООО</td>
+				</tr>
+				<tr>
+					<td>Выпуск:</td>
+					<td>Вып. 1</td>
+				</tr>
+				<tr>
+					<td colspan="2">... для каждого свойства из xml</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<table>
+			<thead>
+				<tr>
+					<th colspan="2">Открытое акционерное общество "Нефтяная компания "ЛУКОЙЛ""</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Эмитент (кратко):</td>
+					<td>ТГК-2</td>
+				</tr>
+				<tr>
+					<td>Тип:</td>
+					<td>Облигация ООО</td>
+				</tr>
+				<tr>
+					<td>Выпуск:</td>
+					<td>Вып. 1</td>
+				</tr>
+				<tr>
+					<td colspan="2">... для каждого свойства из xml</td>
+				</tr>
+			</tbody>
+		</table>
+		... для каждого элемента из xml своя "карточка" ...
+	</p>
+
+	<p>
+		Использовать конструкции xsl:if, xsl:choose, xsl:for-each, xsl:call-template крайне не рекомендуется.
+	</p>
+	<p>
+		Трансформация должна происходить на сервере с использованием xsltProcessor (<a href="http://php.net/manual/en/class.xsltprocessor.php">http://php.net/manual/en/class.xsltprocessor.php</a>).
+		<br />
+		Скрипт для осуществления трансформации можно взять прямо из примеров в документации <a href="http://php.net/manual/en/xsltprocessor.construct.php">http://php.net/manual/en/xsltprocessor.construct.php</a>.
+	</p>
+
+    <h3>Задача #4</h3>
+    <p>
+        Предположим, что данные из таблицы "some table" требуется сохранять в БД: какой на ваш взгляд должна быть ее структура? <br />
+        Результатом должен быть sql_dump БД, структура таблиц которой реализует возможность хранения данных в нормализованном виде.
+    </p>
+
+    <h3>Задача #5</h3>
+	<p>
+		Составить запрос, который бы агрегировал данные из таблиц задания #4 по столбцу "Тип", суммиря столбец "номинал".
+        Записи неопределенного типа также должны войти в выборку. Сортировка должна вестись по убыванию суммы номиналов.<br>
+        Итоговая выборка в запросе должна содержать поля:<br>
+        <b>Тип</b> | <b>Номинал</b> | <b>Список эмитентов данного типа (перечисленных череp запятую)</b>.
+	</p>
+
+	<h1>Данные для задания:</h1>
+	<h3>Some table</h3>
+	<table id="stable" style="border-collapse:collapse;">
+	<thead><tr>
+	<th style='border:1px solid #CCC;background:#EEE'>Эмитент</th>
+
+	<th style='border:1px solid #CCC;background:#EEE'>Эмитент (кратко)</th>
+
+	<th style='border:1px solid #CCC;background:#EEE'>Тип</th>
+
+	<th style='border:1px solid #CCC;background:#EEE'>Выпуск</th>	<th style='border:1px solid #CCC;background:#EEE'>Номинал (р.)</th>
+	<th style='border:1px solid #CCC;background:#EEE'>Дата гос. регистрации</th>	<th style='border:1px solid #CCC;background:#EEE'>Дата регистрации отчета / Уведомления об итогах</th>
+
+	<th style='border:1px solid #CCC;background:#EEE'>Код гос. регистрации</th>
+
+	<th style='border:1px solid #CCC;background:#EEE'>Код ДКК</th>
+	<th style='border:1px solid #CCC;background:#EEE'>Код РТС</th>
+
+	<th style='border:1px solid #CCC;background:#EEE'>ISIN</th>	<th style='border:1px solid #CCC;background:#EEE'>Наличие блокировок</th>
+	<th style='border:1px solid #CCC;background:#EEE'>CFI</th>	<th style='border:1px solid #CCC;background:#EEE'>Лицевой счет ДКК</th>
+
+	<th style='border:1px solid #CCC;background:#EEE'>Вариант обслуживания</th>
+
+	<th style='border:1px solid #CCC;background:#EEE'>Наименование выпускаn</th>
+
+</tr></thead>
+<tbody><tr>
+	<td style='border:1px solid #CCC;'>РћС‚РєСЂС‹С‚РѕРµ Р°РєС†РёРѕРЅРµСЂРЅРѕРµ РѕР±С‰РµСЃС‚РІРѕ РљРѕРјРјРµСЂС‡РµСЃРєРёР№ Р±Р°РЅРє "РџРµС‚СЂРѕРєРѕРјРјРµСЂС†" 
+</td>
+
+	<td style='border:1px solid #CCC;'>РћРђРћ Р‘Р°РЅРє "РџРµС‚СЂРѕРєРѕРјРјРµСЂС†" 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>Р’С‹Рї. 1 
+ 
+ 
+ 
+</td>
+
+
+	<td style='border:1px solid #CCC;'>1000 
+ 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>25.06.10 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>06.03.12 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>4B020101776B 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>RF0000018074 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>RU000A0JS4V6 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>3290023081 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёРё (РѕСЃРЅРѕРІРЅРѕР№) 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+	<td style='border:1px solid #CCC;'>РћР±Р».Р‘Р°РЅРєРџРµС‚СЂРєРѕРј РћР‘01 
+</td>
+
+
+
+
+</tr>
+<tr>
+	<td style='border:1px solid #CCC;'>РћС‚РєСЂС‹С‚РѕРµ Р°РєС†РёРѕРЅРµСЂРЅРѕРµ РѕР±С‰РµСЃС‚РІРѕ "РњРµС‡РµР»"</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>РћРђРћ "РњРµС‡РµР»" 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>Р’С‹Рї. 17 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>1000 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>10.08.10 
+</td>
+
+
+	<td style='border:1px solid #CCC;'>20.06.11 
+ 
+</td>
+
+
+	<td style='border:1px solid #CCC;'>4-17-55005-E 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>RF0000017264 
+ 
+ 
+</td>
+
+
+	<td style='border:1px solid #CCC;'>MTLR17 
+</td>	<td style='border:1px solid #CCC;'>RU000A0JRJS2</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёРё (РѕСЃРЅРѕРІРЅРѕР№) 
+ 
+ 
+ 
+ 
+</td>
+
+
+	<td style='border:1px solid #CCC;'>РћР±Р». РњРµС‡РµР» 17</td>
+
+
+
+</tr>
+<tr>
+	<td style='border:1px solid #CCC;'>РћР±С‰РµСЃС‚РІРѕ СЃ РѕРіСЂР°РЅРёС‡РµРЅРЅРѕР№ РѕС‚РІРµС‚СЃС‚РІРµРЅРЅРѕСЃС‚СЊСЋ "РњР“ РіСЂСѓРїРї" 
+ 
+ 
+</td>
+
+
+	<td style='border:1px solid #CCC;'>РћРћРћ "РњР“ РіСЂСѓРїРї" 
+ 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёСЏ РћРћРћ 
+ 
+</td>
+
+
+	<td style='border:1px solid #CCC;'>Р’С‹Рї. 4 
+ 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'>890 
+ 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>20.08.09 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>08.09.09 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>4-04-36074-R 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>RF0000015005 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>RU000A0JQAP9 
+ 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёРё (РѕСЃРЅРѕРІРЅРѕР№) 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>РћР±Р». РњР“ РіСЂСѓРїРї 4 
+ 
+ 
+ 
+ 
+ 
+</td></tr>
+<tr>
+	<td style='border:1px solid #CCC;'>РћР±С‰РµСЃС‚РІРѕ СЃ РѕРіСЂР°РЅРёС‡РµРЅРЅРѕР№ РѕС‚РІРµС‚СЃС‚РІРµРЅРЅРѕСЃС‚СЊСЋ "РњРёСЂР°С‚РѕСЂРі Р¤РёРЅР°РЅСЃ" 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>РћРћРћ "РњРёСЂР°С‚РѕСЂРі Р¤РёРЅР°РЅСЃ" 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёСЏ Р±РёСЂР¶РµРІР°СЏ 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>Р’С‹Рї. 1 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>1000</td>
+
+	<td style='border:1px solid #CCC;'>19.07.11</td>
+
+
+
+	<td style='border:1px solid #CCC;'>02.08.11 
+</td>
+
+	<td style='border:1px solid #CCC;'>4B02-01-36276-R 
+ 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'>RF0000017405 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'>RU000A0JRNR6 
+ 
+ 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'></td>
+	<td style='border:1px solid #CCC;'></td>
+
+	<td style='border:1px solid #CCC;'></td>
+
+
+
+	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёРё (РѕСЃРЅРѕРІРЅРѕР№) 
+ 
+</td>	<td style='border:1px solid #CCC;'>РћР±Р».РњРёСЂР°С‚РѕСЂРіР¤РёРЅ РћР‘01</td>
+
+
+
+
+</tr>
+<tr>
+	<td style='border:1px solid #CCC;'>Р—Р°РєСЂС‹С‚РѕРµ Р°РєС†РёРѕРЅРµСЂРЅРѕРµ РѕР±С‰РµСЃС‚РІРѕ "Р“Р Р”Р РћРњРђРЁРЎР•Р Р’Р РЎ" 
+ 
+ 
+ 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'>Р—РђРћ "Р“Р Р”Р РћРњРђРЁРЎР•Р Р’Р РЎ" 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёСЏ РђРћ</td>
+
+
+
+	<td style='border:1px solid #CCC;'>Р’С‹Рї. 2 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>1000 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>20.10.11 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>01.03.12 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>4-02-17174-H</td>
+	<td style='border:1px solid #CCC;'>RF0000017948 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>RU000A0JS3V8 
+ 
+</td>
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+</td>
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёРё (РѕСЃРЅРѕРІРЅРѕР№) 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>РћР±Р».Р“РёРґСЂРѕРњР°С€РЎСЂРІРёСЃ 2 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+</tr>
+<tr>
+	<td style='border:1px solid #CCC;'>"РњРѕСЃРєРѕРІСЃРєРёР№ РљСЂРµРґРёС‚РЅС‹Р№ Р‘Р°РЅРє" (РѕС‚РєСЂС‹С‚РѕРµ Р°РєС†РёРѕРЅРµСЂРЅРѕРµ РѕР±С‰РµСЃС‚РІРѕ) 
+ 
+</td>	<td style='border:1px solid #CCC;'>РћРђРћ "РњРѕСЃРєРѕРІСЃРєРёР№ РљСЂРµРґРёС‚РЅС‹Р№ Р‘Р°РЅРє"</td>	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>Р’С‹Рї. 3 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>1000</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>15.10.10 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>27.04.12</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>4B020301978B 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>RF0000018232 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>RU000A0JS7G0 
+ 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'> 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'> 
+</td>	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёРё (РѕСЃРЅРѕРІРЅРѕР№) 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>РћР±Р». РњРљР‘ РћР‘03</td></tr>
+<tr>
+	<td style='border:1px solid #CCC;'>РћР±С‰РµСЃС‚РІРѕ СЃ РѕРіСЂР°РЅРёС‡РµРЅРЅРѕР№ РѕС‚РІРµС‚СЃС‚РІРµРЅРЅРѕСЃС‚СЊСЋ "РђРіСЂРѕС…РѕР»РґРёРЅРі-Р¤РёРЅР°РЅСЃ"</td>
+	<td style='border:1px solid #CCC;'>РћРћРћ "РђРіСЂРѕС…РѕР»РґРёРЅРі-Р¤РёРЅР°РЅСЃ" 
+ 
+</td>
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>Р’С‹Рї. 1 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>1000 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>01.06.06 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>15.08.06 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>4-01-36147-R 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>RF0000009094 
+ 
+ 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'>AGHF01 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>RU000A0JNH39 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'> 
+</td>
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'> 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёРё (РѕСЃРЅРѕРІРЅРѕР№) 
+</td>
+
+	<td style='border:1px solid #CCC;'>РћР±Р».РђРіСЂРѕС…РѕР».-Р¤РёРЅ. 01 
+ 
+ 
+ 
+</td>
+</tr>
+<tr>
+	<td style='border:1px solid #CCC;'>РћС‚РєСЂС‹С‚РѕРµ Р°РєС†РёРѕРЅРµСЂРЅРѕРµ РѕР±С‰РµСЃС‚РІРѕ "РђРїС‚РµС‡РЅР°СЏ СЃРµС‚СЊ 36,6" 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>РћРђРћ "РђРїС‚РµС‡РЅР°СЏ СЃРµС‚СЊ 36,6" 
+ 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'> 
+ 
+ 
+</td>
+
+
+	<td style='border:1px solid #CCC;'>Р’С‹Рї. 1</td>
+
+
+	<td style='border:1px solid #CCC;'>1000 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'>01.06.06 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>01.08.06 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+	<td style='border:1px solid #CCC;'>4-01-07335-A 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'>RF0000008999 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>APTK01 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>RU000A0JNFZ4 
+ 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+</td>
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>3290023081 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёРё (РѕСЃРЅРѕРІРЅРѕР№) 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'>РћР±Р».РђРїС‚.СЃРµС‚СЊ 36,6 01 
+ 
+ 
+</td>
+
+
+
+</tr>
+<tr>
+	<td style='border:1px solid #CCC;'>РћС‚РєСЂС‹С‚РѕРµ Р°РєС†РёРѕРЅРµСЂРЅРѕРµ РѕР±С‰РµСЃС‚РІРѕ РљРѕРјРјРµСЂС‡РµСЃРєРёР№ Р‘Р°РЅРє "РЎС‚СЂРѕР№РєСЂРµРґРёС‚" 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>РћРђРћ РљР‘ "РЎС‚СЂРѕР№РєСЂРµРґРёС‚" 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>Р’С‹Рї. 1 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>1000</td>
+
+
+	<td style='border:1px solid #CCC;'>15.07.11 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>28.07.11</td>	<td style='border:1px solid #CCC;'>4B020100018B 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>RF0000017390 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>RU000A0JRN11</td>
+
+
+	<td style='border:1px solid #CCC;'> 
+</td>
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'> 
+ 
+</td>
+
+
+	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёРё (РѕСЃРЅРѕРІРЅРѕР№) 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'>РћР±Р».РљР‘ РЎС‚СЂРѕР№РєСЂ РћР‘01 
+ 
+ 
+ 
+</td>
+
+</tr>
+<tr>
+	<td style='border:1px solid #CCC;'>РћР±С‰РµСЃС‚РІРѕ СЃ РѕРіСЂР°РЅРёС‡РµРЅРЅРѕР№ РѕС‚РІРµС‚СЃС‚РІРµРЅРЅРѕСЃС‚СЊСЋ "Р®С‚СЌР№СЂ-Р¤РёРЅР°РЅСЃ" 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>РћРћРћ "Р®С‚СЌР№СЂ-Р¤РёРЅР°РЅСЃ" 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>Р’С‹Рї. 4 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>1000 
+ 
+ 
+ 
+ 
+</td>
+
+
+	<td style='border:1px solid #CCC;'>15.03.11 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>30.03.11 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>4B02-04-36059-R 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>RF0000017014 
+ 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>RU000A0JRDB1 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёРё (РѕСЃРЅРѕРІРЅРѕР№) 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>РћР±Р».Р®С‚СЌР№СЂ-Р¤РёРЅР°РЅСЃ РћР‘4 
+ 
+</td>
+
+
+
+
+</tr>
+<tr>
+	<td style='border:1px solid #CCC;'>РћС‚РєСЂС‹С‚РѕРµ Р°РєС†РёРѕРЅРµСЂРЅРѕРµ РѕР±С‰РµСЃС‚РІРѕ "Р“Р°Р·РїСЂРѕРј РЅРµС„С‚СЊ"</td>
+
+
+	<td style='border:1px solid #CCC;'>РћРђРћ "Р“Р°Р·РїСЂРѕРј РЅРµС„С‚СЊ" 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёСЏ РђРћ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>Р’С‹Рї. 10 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>1000 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>10.08.10 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>03.03.11 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>4-10-00146-A 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>RF0000016815 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'> 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>RU000A0JR878 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёРё (РѕСЃРЅРѕРІРЅРѕР№)</td>
+	<td style='border:1px solid #CCC;'>РћР±Р».Р“Р°Р·РїСЂРѕРјРќРµС„С‚СЊ 10</td>
+</tr>
+<tr>
+	<td style='border:1px solid #CCC;'>РћС‚РєСЂС‹С‚РѕРµ Р°РєС†РёРѕРЅРµСЂРЅРѕРµ РѕР±С‰РµСЃС‚РІРѕ "Р‘Р°РЅРє "РЎР°РЅРєС‚-РџРµС‚РµСЂР±СѓСЂРі"</td>	<td style='border:1px solid #CCC;'>РћРђРћ "Р‘Р°РЅРє "РЎР°РЅРєС‚-РџРµС‚РµСЂР±СѓСЂРі" 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+</td>
+
+
+	<td style='border:1px solid #CCC;'>Р’С‹Рї. 1 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>1000 
+</td>	<td style='border:1px solid #CCC;'>01.03.10 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>13.04.10 
+ 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>4B020100436B 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>RF0000015667 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>RU000A0JQU54 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёРё (РѕСЃРЅРѕРІРЅРѕР№) 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>РћР±Р».Р‘Р°РЅРєРЎРџР± РћР‘ 01 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+
+</tr>
+<tr>
+	<td style='border:1px solid #CCC;'>Р‘Р°РЅРє Р—Р•РќР Рў (РѕС‚РєСЂС‹С‚РѕРµ Р°РєС†РёРѕРЅРµСЂРЅРѕРµ РѕР±С‰РµСЃС‚РІРѕ)</td>
+	<td style='border:1px solid #CCC;'>РћРђРћ Р‘Р°РЅРє Р—Р•РќР Рў 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>Р’С‹Рї. 6 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>1000 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>31.03.11 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>26.05.11 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>4B020603255B 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>RF0000017227 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>RU000A0JRHD8 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'></td>
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'> 
+</td>	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёРё (РѕСЃРЅРѕРІРЅРѕР№) 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'>РћР±Р».Р‘Р°РЅРєР—РµРЅРёС‚ РћР‘ 06 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+</tr>
+<tr>
+	<td style='border:1px solid #CCC;'>РћС‚РєСЂС‹С‚РѕРµ Р°РєС†РёРѕРЅРµСЂРЅРѕРµ РѕР±С‰РµСЃС‚РІРѕ "Р•Р’Р РђР— РњРµС‚Р°Р»Р» Р РЅРїСЂРѕРј" 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>РћРђРћ "Р•Р’Р РђР— РњРµС‚Р°Р»Р» Р РЅРїСЂРѕРј" 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёСЏ РђРћ РїСЂРѕС†РµРЅС‚РЅР°СЏ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>Р’С‹Рї. 2 
+</td>
+
+	<td style='border:1px solid #CCC;'>1000 
+ 
+</td>	<td style='border:1px solid #CCC;'>28.06.05</td>
+
+
+
+	<td style='border:1px solid #CCC;'>26.08.05 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'>4-02-55534-P</td>	<td style='border:1px solid #CCC;'>RF0000007198 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>INPR02 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>RU000A0E7FG5 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'> 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёРё (РѕСЃРЅРѕРІРЅРѕР№) 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>РћР±Р»Р•Р’Р РђР—РњРµС‚Р РЅРїСЂ 02 
+ 
+ 
+</td></tr>
+<tr>
+	<td style='border:1px solid #CCC;'>РћС‚РєСЂС‹С‚РѕРµ Р°РєС†РёРѕРЅРµСЂРЅРѕРµ РѕР±С‰РµСЃС‚РІРѕ "РњРµР¶СЂРµРіРёРѕРЅР°Р»СЊРЅР°СЏ СЂР°СЃРїСЂРµРґРµР»РёС‚РµР»СЊРЅР°СЏ СЃРµС‚РµРІР°СЏ РєРѕРјРїР°РЅРёСЏ Р®РіР°" 
+ 
+ 
+</td>
+
+
+	<td style='border:1px solid #CCC;'>РћРђРћ "РњР РЎРљ Р®РіР°" 
+ 
+ 
+ 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>Р’С‹Рї. 2 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>1000 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>16.12.08 
+</td>
+
+	<td style='border:1px solid #CCC;'>08.09.09 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>4-02-34956-E 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>RF0000015016</td>
+
+	<td style='border:1px solid #CCC;'>MRKY02 
+ 
+</td>	<td style='border:1px solid #CCC;'>RU000A0JQAR5 
+</td>
+
+
+	<td style='border:1px solid #CCC;'> 
+</td>
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'></td>
+
+
+
+	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёРё (РѕСЃРЅРѕРІРЅРѕР№) 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>РћР±Р». РњР РЎРљ Р®РіР° 02 
+ 
+</td></tr>
+<tr>
+	<td style='border:1px solid #CCC;'>Р’РўР‘ Р›РёР·РёРЅРі Р¤РёРЅР°РЅСЃ (РѕР±С‰РµСЃС‚РІРѕ СЃ РѕРіСЂР°РЅРёС‡РµРЅРЅРѕР№ РѕС‚РІРµС‚СЃС‚РІРµРЅРЅРѕСЃС‚СЊСЋ)</td>
+	<td style='border:1px solid #CCC;'>РћРћРћ Р’РўР‘ Р›РёР·РёРЅРі Р¤РёРЅР°РЅСЃ 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>Р’С‹Рї. 4 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>692.32 
+ 
+ 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'>19.06.08 
+</td>	<td style='border:1px solid #CCC;'>25.06.09</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>4-04-36292-R</td>
+
+	<td style='border:1px solid #CCC;'>RF0000014730 
+</td>	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>RU000A0JQ672 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'> 
+</td>
+
+
+	<td style='border:1px solid #CCC;'></td>
+
+
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёРё (РѕСЃРЅРѕРІРЅРѕР№) 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>РћР±Р».Р’РўР‘-Р›РёР·РёРЅРіР¤РёРЅ.04 
+</td>
+
+</tr>
+<tr>
+	<td style='border:1px solid #CCC;'>РђРєС†РёРѕРЅРµСЂРЅС‹Р№ РєРѕРјРјРµСЂС‡РµСЃРєРёР№ Р±Р°РЅРє "Р РћРЎР‘РђРќРљ" (РѕС‚РєСЂС‹С‚РѕРµ Р°РєС†РёРѕРЅРµСЂРЅРѕРµ РѕР±С‰РµСЃС‚РІРѕ) 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>РћРђРћ РђРљР‘ "Р РћРЎР‘РђРќРљ" 
+</td>
+
+	<td style='border:1px solid #CCC;'> 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>Р’С‹Рї. 10 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>1000 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>18.09.09 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'>01.12.09 
+</td>
+
+
+	<td style='border:1px solid #CCC;'>41002272B 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>RF0000015216 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+	<td style='border:1px solid #CCC;'>RU000A0JQH69 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'></td>
+
+
+
+	<td style='border:1px solid #CCC;'>3290023081 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёРё (РѕСЃРЅРѕРІРЅРѕР№)</td>
+	<td style='border:1px solid #CCC;'>РћР±Р».Р РћРЎР‘РђРќРљ10</td>
+
+
+
+
+</tr>
+<tr>
+	<td style='border:1px solid #CCC;'>РћС‚РєСЂС‹С‚РѕРµ Р°РєС†РёРѕРЅРµСЂРЅРѕРµ РѕР±С‰РµСЃС‚РІРѕ "РўРѕСЂРіРѕРІС‹Р№ Р”РѕРј "РљРћРџР•Р™РљРђ" 
+</td>
+	<td style='border:1px solid #CCC;'>РћРђРћ "РўР” "РљРћРџР•Р™РљРђ" 
+ 
+ 
+ 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>Р’С‹Рї. 2</td>
+
+
+
+	<td style='border:1px solid #CCC;'>1000 
+ 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'>06.07.10 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'>05.10.10 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>4B02-02-55165-E 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>RF0000016361 
+ 
+ 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+</td>
+
+
+	<td style='border:1px solid #CCC;'>RU000A0JR2D9 
+ 
+ 
+ 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'> 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'>1397477 
+ 
+ 
+</td>
+
+
+	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёРё (РѕСЃРЅРѕРІРЅРѕР№) 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>РћР±Р».РўР” РљРћРџР•Р™РљРђ РћР‘2</td>
+</tr>
+<tr>
+	<td style='border:1px solid #CCC;'>РћС‚РєСЂС‹С‚РѕРµ Р°РєС†РёРѕРЅРµСЂРЅРѕРµ РѕР±С‰РµСЃС‚РІРѕ "РўРµСЂСЂРёС‚РѕСЂРёР°Р»СЊРЅР°СЏ РіРµРЅРµСЂРёСЂСѓСЋС‰Р°СЏ РєРѕРјРїР°РЅРёСЏ в„–6" 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>РћРђРћ "РўР“Рљ-6" 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'> 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>Р’С‹Рї. 1 
+ 
+ 
+ 
+</td>
+
+
+	<td style='border:1px solid #CCC;'>1000 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>29.04.10 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'>09.09.10 
+</td>
+
+
+	<td style='border:1px solid #CCC;'>4-01-55091-E 
+ 
+ 
+ 
+ 
+ 
+</td>
+	<td style='border:1px solid #CCC;'>RF0000016219 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>TGKF01 
+ 
+ 
+ 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'>RU000A0JR0E1 
+</td>	<td style='border:1px solid #CCC;'> 
+ 
+ 
+</td>	<td style='border:1px solid #CCC;'> 
+ 
+ 
+ 
+</td>
+
+
+
+
+	<td style='border:1px solid #CCC;'> 
+</td>
+
+
+
+	<td style='border:1px solid #CCC;'>РћР±Р»РёРіР°С†РёРё (РѕСЃРЅРѕРІРЅРѕР№) 
+ 
+ 
+ 
+ 
+ 
+ 
+</td>
+
+	<td style='border:1px solid #CCC;'>РћР±Р».РўР“Рљ-6 01 
+ 
+</td>
+
+
+
+</tr>
+</tbody>	</table>
+</body>
+</html>
